@@ -1,0 +1,49 @@
+.Toastify__toast-container {
+  width: auto;
+  max-width: 400px;
+}
+
+.Toastify__toast {
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.Toastify__toast--warning {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.Toastify__progress-bar {
+  height: 3px;
+}
+
+.Toastify__progress-bar--success {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.Toastify__progress-bar--error {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.Toastify__close-button {
+  color: white;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+  }
+}

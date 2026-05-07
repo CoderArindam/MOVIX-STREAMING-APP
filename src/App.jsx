@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { fetchDataFromApi } from "./utils/api";
 import { useSelector, useDispatch } from "react-redux";
 import { getApiConfiguration, getGenres } from "./store/homeSlice";
+import Toast from "./components/Toast/Toast";
 import Header from "./components/header/Header.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import Home from "./pages/home/Home";
@@ -27,24 +28,13 @@ const App = () => {
           login({
             uid: authUser.uid,
             email: authUser.email,
-            emailVerified: authUser.emailVerified
-          })
+            emailVerified: authUser.emailVerified,
+          }),
         );
       } else {
         dispatch(logout());
       }
     });
-
-    // Check for authentication on page load
-    // if (auth.currentUser) {
-    //   dispatch(
-    //     login({
-    //       uid: auth.currentUser.uid,
-    //       email: auth.currentUser.email,
-    //       emailVerified: auth.currentUser.emailVerified
-    //     })
-    //   );
-    // }
 
     return () => unsubscribe();
   }, [dispatch]);
@@ -59,7 +49,7 @@ const App = () => {
       const url = {
         backdrop: response.images.secure_base_url + "original",
         poster: response.images.secure_base_url + "original",
-        profile: response.images.secure_base_url + "original"
+        profile: response.images.secure_base_url + "original",
       };
 
       dispatch(getApiConfiguration(url));
@@ -85,21 +75,26 @@ const App = () => {
   };
 
   return (
-    <Router>
-      {!user ? <GetStartedPage /> : (
-        <>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/:mediaType/:id" element={<Details />} />
-            <Route path="/search/:query" element={<SearchResult />} />
-            <Route path="/explore/:mediaType" element={<Explore />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-          <Footer />
-        </>
-      )}
-    </Router>
+    <>
+      <Toast />
+      <Router>
+        {!user ? (
+          <GetStartedPage />
+        ) : (
+          <>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/:mediaType/:id" element={<Details />} />
+              <Route path="/search/:query" element={<SearchResult />} />
+              <Route path="/explore/:mediaType" element={<Explore />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+            <Footer />
+          </>
+        )}
+      </Router>
+    </>
   );
 };
 

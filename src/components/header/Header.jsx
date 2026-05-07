@@ -76,16 +76,17 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    // Dispatch the logout action from Redux
     dispatch(logout());
-    auth.signOut()
+    auth.signOut().then(() => {
+      navigate("/");
+    });
   };
 
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
         <div className="logo">
-          <img src={logo} onClick={() => navigate('/')} alt="" />
+          <img src={logo} onClick={() => navigate("/")} alt="" />
         </div>
         <ul className="menuItems">
           <li className="menuItem" onClick={() => navigationHandler("movie")}>
@@ -98,7 +99,9 @@ const Header = () => {
             <HiOutlineSearch onClick={openSearch} />
           </li>
           <li>
-            <button className="logout-button" onClick={handleLogout}>Logout</button>
+            <button className="logout-button" onClick={handleLogout}>
+              Logout
+            </button>
           </li>
         </ul>
         <div className="mobileMenuItems">
